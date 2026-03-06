@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TimeVerse.in — Premium Luxury Watches Online India | Free Shipping | COD Available</title>
+<meta name="description" content="Buy premium luxury watches online at TimeVerse.in. 500+ watches from Rolex, Rado, Fossil, Diesel & more. Free shipping pan-India. Cash on Delivery. Mumbai.">
+<meta name="keywords" content="luxury watches online india, buy watches india, rolex india, rado watch, fossil watch, diesel watch, cod watches, timeverse, premium watches mumbai">
+<meta name="author" content="TimeVerse.in">
+<meta property="og:title" content="TimeVerse.in — Premium Luxury Watches Online India">
+<meta property="og:description" content="500+ premium watches. Free shipping. COD available. Shop now at TimeVerse.in">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://timeverse.in">
+<link rel="canonical" href="https://timeverse.in">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ CURSOR ══ -->
+<div class="cur"  id="curDot"></div>
+<div class="cur2" id="curRing"></div>
+
+<!-- ══ TOAST NOTIFICATIONS ══ -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="logo" onclick="nav('home')">
+    <span class="logo-crown">👑</span>
+    <div class="logo-text">
+      <span class="logo-tv">TV</span>
+      <span class="logo-main">TimeVerse.in</span>
+    </div>
+  </div>
+
+  <nav class="header-nav">
+    <a class="nav-link active" data-page="home"    onclick="nav('home')">Home</a>
+    <a class="nav-link"        data-page="shop"    onclick="nav('shop')">Collections</a>
+    <a class="nav-link"        data-page="about"   onclick="nav('about')">About</a>
+    <a class="nav-link"        data-page="contact" onclick="nav('contact')">Contact</a>
+  </nav>
+
+  <div class="header-actions">
+    <!-- Search -->
+    <button class="hbtn" onclick="openSearch()" title="Search watches">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <!-- Account -->
+    <button class="hbtn" onclick="nav(STATE.user?'account':'login')" title="My Account">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+    <!-- Cart -->
+    <button class="hbtn" onclick="toggleCart()" title="Shopping Cart" style="position:relative">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <!-- Hamburger -->
+    <button class="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══ MOBILE NAV ══ -->
+<nav class="mobile-nav" id="mobileNav">
+  <a class="nav-link" data-page="home"     onclick="nav('home')">Home</a>
+  <a class="nav-link" data-page="shop"     onclick="nav('shop')">Collections</a>
+  <a class="nav-link" data-page="about"    onclick="nav('about')">About Us</a>
+  <a class="nav-link" data-page="contact"  onclick="nav('contact')">Contact</a>
+  <a class="nav-link" data-page="shipping" onclick="nav('shipping')">Shipping Policy</a>
+  <a class="nav-link" data-page="privacy"  onclick="nav('privacy')">Privacy Policy</a>
+  <a class="nav-link" data-page="terms"    onclick="nav('terms')">Terms of Service</a>
+  <a class="nav-link" onclick="nav(STATE.user?'account':'login')">My Account</a>
+</nav>
+
+<!-- ══ SEARCH OVERLAY ══ -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <input class="search-input" id="searchInput" placeholder="Search watches, brands…" autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ══ CART DRAWER ══ -->
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-backdrop" onclick="toggleCart()"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <span class="cart-title">Shopping Cart 🛒</span>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items-wrap" id="cartItemsWrap"></div>
+    <div id="cartFooter"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════════════════════════ -->
+<div class="page active" id="pg-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://watchworld.in/cdn/shop/files/WhatsApp_Image_2024-01-05_at_10.02.07_AM_1.webp" alt="Luxury Watch" onerror="this.style.display='none'">
+    </div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-eyebrow">India's Premier Watch Destination</div>
+        <h1 class="hero-heading">
+          Time Is The<br>
+          <span class="italic">Ultimate Luxury</span>
+        </h1>
+        <p class="hero-desc">
+          From dedicated watch collectors to those discovering their first perfect timepiece — 
+          we're here to help you explore and choose watches that truly match your style. ⌚
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-gold btn-lg" onclick="nav('shop')">
+            Explore Collection
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button class="btn btn-outline btn-lg" onclick="nav('about')">Our Story</button>
+        </div>
+      </div>
+
+      <!-- 3D WATCH VISUAL -->
+      <div class="hero-watch">
+        <div class="hero-watch-wrap">
+          <div class="hero-ring"></div>
+          <div class="hero-ring2"></div>
+          <div class="hero-dot"></div>
+          <img class="hero-img"
+               src="https://watchworld.in/cdn/shop/files/WhatsAppImage2026-02-16at9.24.16PM.jpg"
+               alt="Featured Watch"
+               onerror="this.outerHTML='<div class=\'hero-img\' style=\'display:flex;align-items:center;justify-content:center;font-size:110px\'>⌚</div>'">
+          <div class="hero-tags">
+            <div class="hero-tag"><span>Material</span>Sapphire Crystal</div>
+            <div class="hero-tag"><span>Water Resist</span>100m ATM</div>
+            <div class="hero-tag"><span>Payment</span>COD Available ✓</div>
+            <div class="hero-tag"><span>Shipping</span>FREE Pan-India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <span class="stat-num" data-count="500" data-suffix="+">0</span>
+        <span class="stat-label">Products</span>
+      </div>
+      <div class="stat-item reveal d1">
+        <span class="stat-num" data-count="15" data-suffix="+">0</span>
+        <span class="stat-label">Watch Brands</span>
+      </div>
+      <div class="stat-item reveal d2">
+        <span class="stat-num" data-count="10000">0</span>
+        <span class="stat-label">Happy Customers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND LOGOS MARQUEE -->
+  <div class="brands-section">
+    <p class="brands-label">Trusted Brands We Carry</p>
+    <div class="brands-track-wrap">
+      <div class="brands-track" id="brandsTrack"></div>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <div class="section container">
+    <div class="sec-hd center reveal">
+      <span class="sec-eyebrow">Browse By Style</span>
+      <h2 class="sec-title">Shop Our <em>Collections</em></h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="collection-grid reveal">
+      <div class="collection-banner" onclick="setFilter('men');nav('shop')">
+        <img src="https://watchworld.in/cdn/shop/collections/2.png" alt="Men's Watches" onerror="this.style.background='var(--dk4)'">
+        <div class="collection-banner-ov">
+          <div><h3>Men's <em>Watches</em></h3><p>Explore Collection →</p></div>
+        </div>
+      </div>
+      <div class="collection-side">
+        <div class="collection-banner" onclick="setFilter('ladies');nav('shop')" style="height:100%">
+          <img src="https://watchworld.in/cdn/shop/collections/f80bdc_ab5690b2750149fc95b445dee9302fb7_mv2.webp" alt="Women's Watches" onerror="this.style.background='var(--dk4)'">
+          <div class="collection-banner-ov">
+            <div><h3>Women's <em>Watches</em></h3><p>Explore →</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="collection-grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:16px">
+      <div class="collection-banner reveal" onclick="setFilter('couple');nav('shop')" style="height:220px">
+        <img src="https://watchworld.in/cdn/shop/collections/3.png" alt="Couple Watches" onerror="this.style.background='var(--dk4)'">
+        <div class="collection-banner-ov"><div><h3 style="font-size:20px">Couple <em>Watches</em></h3></div></div>
+      </div>
+      <div class="collection-banner reveal d1" onclick="setFilter('bestseller');nav('shop')" style="height:220px">
+        <img src="https://watchworld.in/cdn/shop/collections/5.png" alt="Best Sellers" onerror="this.style.background='var(--dk4)'">
+        <div class="collection-banner-ov"><div><h3 style="font-size:20px"><em>Best</em> Sellers</h3></div></div>
+      </div>
+      <div class="collection-banner reveal d2" onclick="setFilter('premium');nav('shop')" style="height:220px">
+        <img src="https://watchworld.in/cdn/shop/files/watch_wold.webp" alt="Premium Watches" onerror="this.style.background='var(--dk4)'">
+        <div class="collection-banner-ov"><div><h3 style="font-size:20px"><em>Premium</em> Watches</h3></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCTS -->
+  <div class="section section-alt">
+    <div class="container">
+      <div class="sec-hd center reveal">
+        <span class="sec-eyebrow">Handpicked For You</span>
+        <h2 class="sec-title">Featured <em>Timepieces</em></h2>
+        <div class="divider center"></div>
+        <p class="sec-subtitle">Premium watches from the world's finest brands, delivered free across India with COD.</p>
+      </div>
+      <div class="products-grid" id="featuredGrid"></div>
+      <div style="text-align:center;margin-top:44px">
+        <button class="btn btn-outline btn-lg reveal" onclick="nav('shop')">View All 500+ Watches →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE BANNER -->
+  <div class="section container" style="padding-bottom:0">
+    <div class="feature-banner reveal">
+      <img src="https://watchworld.in/cdn/shop/files/rolex_submarine_mens_watch.jpg" alt="Little Luxury" onerror="this.style.background='var(--dk3)'">
+      <div class="feature-banner-ct">
+        <span class="sec-eyebrow">Limited Edition</span>
+        <h2 class="sec-title">Little <em>Luxury</em><br>Big Statement</h2>
+        <button class="btn btn-gold btn-lg" onclick="nav('shop')">Shop Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section container">
+    <div class="sec-hd center reveal">
+      <span class="sec-eyebrow">Customer Reviews</span>
+      <h2 class="sec-title">What Our <em>Customers</em> Say</h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="tcard reveal">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">Absolutely love my Rado from TimeVerse.in! Premium packaging, lightning-fast delivery, and the discount was unbelievable. Genuine product, 100%!</p>
+        <div class="tcard-author">
+          <div class="tcard-avatar">R</div>
+          <div><div class="tcard-name">Rahul Sharma</div><div class="tcard-loc">Mumbai, Maharashtra</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal d1">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">Found the perfect Fossil for my husband's birthday. Cash on Delivery made it so convenient — no stress about payment upfront. Totally genuine!</p>
+        <div class="tcard-author">
+          <div class="tcard-avatar">P</div>
+          <div><div class="tcard-name">Priya Nair</div><div class="tcard-loc">Bengaluru, Karnataka</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal d2">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">TimeVerse has a massive curated collection. My Invicta is stunning — exactly as shown. Customer support replied within hours. Highly recommend!</p>
+        <div class="tcard-author">
+          <div class="tcard-avatar">A</div>
+          <div><div class="tcard-name">Arjun Mehta</div><div class="tcard-loc">Delhi, NCR</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NON-REFUND NOTICE -->
+  <div class="notice-bar">
+    <p>
+      <strong style="color:var(--gold)">📋 Important Purchase Notice:</strong>
+      At TimeVerse.in, all purchases are non-returnable and non-refundable. Please review all product details carefully before completing your purchase. Once an order is confirmed and shipped, it cannot be cancelled, returned, or refunded.
+      Questions? <a href="mailto:timeversetimeverse@gmail.com" style="color:var(--gold)">timeversetimeverse@gmail.com</a>
+    </p>
+  </div>
+
+</div><!-- /pg-home -->
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: SHOP / ALL WATCHES
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-shop">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>Our <em>Collections</em></h1>
+      <p>500+ premium timepieces from 15+ world-class brands</p>
+    </div>
+  </div>
+  <div class="section container" style="padding-top:48px">
+    <div id="filterBar" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;align-items:center"></div>
+    <div class="products-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: PRODUCT DETAIL
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-detail">
+  <div id="detailContent" style="padding-top:68px"></div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: CHECKOUT
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-checkout">
+  <div class="page-hero" style="height:200px">
+    <div class="page-hero-ct">
+      <h1><em>Checkout</em></h1>
+      <p>Secure checkout · Cash on Delivery</p>
+    </div>
+  </div>
+  <div id="checkoutContent"></div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: LOGIN
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span style="font-size:28px">👑</span>
+        <span class="logo-main" style="display:block;margin-top:6px">TimeVerse.in</span>
+        <p style="color:var(--tx2);font-size:13px;margin-top:8px">Sign in to your account</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab"    onclick="switchAuthTab('login')">Login</button>
+        <button class="auth-tab"        id="registerTab" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm">
+        <div class="form-group"><label>Email Address</label>
+          <input class="form-control" id="loginEmail" type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password</label>
+          <input class="form-control" id="loginPass" type="password" placeholder="••••••••">
+        </div>
+        <p style="font-size:11px;color:var(--tx3);margin-bottom:10px;padding:8px;background:var(--dk3);border-radius:4px">
+          Demo: <strong style="color:var(--gold)">demo@timeverse.in</strong> / <strong style="color:var(--gold)">demo123</strong>
+        </p>
+        <button class="auth-submit" onclick="doLogin()">Sign In →</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerForm" style="display:none">
+        <div class="form-group"><label>Full Name</label>
+          <input class="form-control" id="regName" type="text" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email Address</label>
+          <input class="form-control" id="regEmail" type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password (min. 6 characters)</label>
+          <input class="form-control" id="regPass" type="password" placeholder="Create a password"></div>
+        <button class="auth-submit" onclick="doRegister()">Create Account →</button>
+      </div>
+
+      <p class="auth-hint">Already have an account? <a onclick="switchAuthTab('login')" style="color:var(--gold);cursor:pointer">Sign in</a></p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: MY ACCOUNT
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-account">
+  <div class="account-wrap">
+    <div class="account-header">
+      <h1>My <span>Account</span></h1>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+    <div id="accountContent"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: ABOUT US
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-about">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>About <em>TimeVerse</em></h1>
+      <p>Passion for horology, delivering to every corner of India</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <p>Welcome to <strong style="color:var(--gold)">TimeVerse.in</strong> — India's trusted online destination for premium luxury watches. From dedicated watch collectors to those discovering their first perfect timepiece, we're here to help you explore and choose watches that truly match your style and personality. ⌚</p>
+
+    <h2>Our Story</h2>
+    <p>TimeVerse.in was born from a deep passion for the art of horology. Founded in Mumbai, Maharashtra, we set out with one goal: to make luxury and quality timepieces accessible to every Indian. We believe a watch is more than just a timekeeping device — it's a statement of character, a companion through life's milestones, and an heirloom to be treasured.</p>
+
+    <h2>Our Promise</h2>
+    <p>Every watch in our curated collection is 100% genuine. We source directly from trusted suppliers and carry only authenticated timepieces. When you buy from TimeVerse.in, you buy with confidence.</p>
+
+    <h2>What We Offer</h2>
+    <ul>
+      <li>✓ 500+ handpicked, 100% genuine watches</li>
+      <li>✓ 15+ premium global brands — Rolex, Rado, Fossil, Diesel, Tag Heuer, Gucci, Invicta, Hublot, Tissot, Emporio Armani, Daniel Wellington, Versace, Patek Philippe, Edifice &amp; more</li>
+      <li>✓ FREE shipping pan-India on every order</li>
+      <li>✓ Cash on Delivery (COD) available nationwide</li>
+      <li>✓ Expert customer support Mon–Sat, 10AM–7PM IST</li>
+      <li>✓ 10,000+ happy customers across India</li>
+      <li>✓ Best prices with guaranteed discounts</li>
+    </ul>
+
+    <h2>Mumbai Based · India Wide</h2>
+    <p>Headquartered in Mumbai, Maharashtra, we ship to every corner of India within 3–7 business days. Have a question? We're always here — email us at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a> and we'll respond within 24 hours.</p>
+
+    <h2>Our Values</h2>
+    <p><strong style="color:var(--gold)">Authenticity</strong> — Every timepiece is genuine, no compromises.</p>
+    <p><strong style="color:var(--gold)">Accessibility</strong> — Luxury shouldn't be limited to a few. COD ensures anyone can buy without upfront payment risk.</p>
+    <p><strong style="color:var(--gold)">Trust</strong> — Your satisfaction and confidence in us is our greatest achievement.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: CONTACT US
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-contact">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>Get In <em>Touch</em></h1>
+      <p>We're here to help · Response within 24 hours</p>
+    </div>
+  </div>
+  <div class="contact-wrap">
+    <!-- LEFT: Info -->
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <h4>Email Us</h4>
+          <p><a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a></p>
+          <p style="font-size:12px">We respond within 24 hours</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Business Hours</h4>
+          <p>Monday – Saturday<br>10:00 AM – 7:00 PM IST</p>
+          <p style="font-size:12px">Sunday: Closed</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Location</h4>
+          <p>Mumbai, Maharashtra, India 🇮🇳</p>
+          <p style="font-size:12px">Delivering nationwide</p>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a class="soc-btn" href="https://www.instagram.com/timeverse.in" target="_blank" rel="noopener">
+          📸 Instagram
+        </a>
+        <a class="soc-btn" href="https://www.facebook.com/TimeVerse.in" target="_blank" rel="noopener">
+          📘 Facebook
+        </a>
+      </div>
+
+      <div class="payment-info-panel">
+        <h4>We Accept</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="pay-badge">UPI</span>
+          <span class="pay-badge">Debit Card</span>
+          <span class="pay-badge">Credit Card</span>
+          <span class="pay-badge">Net Banking</span>
+          <span class="pay-badge" style="color:var(--green);border-color:rgba(61,214,140,.3)">Cash on Delivery ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="contact-form-card">
+      <h2>Send Us a Message</h2>
+      <div class="form-group"><label>Your Name *</label>
+        <input class="form-control" id="contactName" placeholder="Your full name"></div>
+      <div class="form-group"><label>Email Address *</label>
+        <input class="form-control" id="contactEmail" type="email" placeholder="email@example.com"></div>
+      <div class="form-group"><label>Subject</label>
+        <input class="form-control" id="contactSubject" placeholder="Order inquiry, product question…"></div>
+      <div class="form-group"><label>Message *</label>
+        <textarea class="form-control" id="contactMsg" rows="5" placeholder="How can we help you?"></textarea></div>
+      <button class="btn btn-gold btn-full btn-lg" onclick="submitContactForm()">
+        Send Message →
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: SHIPPING POLICY
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-shipping">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>Shipping <em>Policy</em></h1>
+      <p>Delivery terms · Free shipping pan-India</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="policy-intro-box">
+      <p><strong style="color:var(--gold)">TimeVerse.in</strong> ("we" and "us") is the operator of TimeVerse.in ("Website"). By placing an order through this Website you agree to the terms below, established to ensure both parties are aware of and agree upon this arrangement to mutually protect and set expectations on our service.</p>
+    </div>
+    <section>
+      <h2>1. General</h2>
+      <p>Subject to stock availability. We try to maintain accurate stock counts on our website but from time-to-time there may be a stock discrepancy and we will not be able to fulfill all your items at time of purchase. In this instance, we will contact you about whether you would prefer to await restocking of the backordered item or if you would prefer for us to cancel your order.</p>
+    </section>
+    <section>
+      <h2>2. Shipping Costs</h2>
+      <p><strong style="color:var(--green)">FREE Shipping</strong> on all orders across India — no minimum order value required. TimeVerse.in offers complimentary shipping on every single order, delivered pan-India.</p>
+    </section>
+    <section>
+      <h2>3. No Returns / Refunds</h2>
+      <p><strong style="color:var(--gold)">⚠️ Important Notice:</strong> At TimeVerse.in, all purchases are <strong style="color:var(--red)">non-returnable and non-refundable</strong>. Please review all product details carefully before completing your purchase. Once an order is confirmed and shipped, it cannot be cancelled, returned, or refunded under any circumstances.</p>
+      <p>For any product inquiries or concerns before purchase, please contact us at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a>.</p>
+    </section>
+    <section>
+      <h2>4. Delivery Terms</h2>
+      <h3>4.1 Transit Time</h3>
+      <p>Domestic shipments within India are in transit for <strong style="color:var(--gold)">2–7 business days</strong> after dispatch. Metro cities typically receive orders in 2–4 days. Remote and rural areas may take up to 10 business days.</p>
+      <h3>4.2 Dispatch Time</h3>
+      <p>Orders are usually dispatched within <strong style="color:var(--gold)">1–2 business days</strong> of order confirmation. Our operations run Monday–Saturday during standard business hours.</p>
+      <h3>4.3 Change of Delivery Address</h3>
+      <p>We can update your delivery address at any time <strong>before the order has been dispatched</strong>. Contact us immediately at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a> with your order ID and new address.</p>
+      <h3>4.4 Delivery Time Exceeded</h3>
+      <p>If your delivery time has exceeded the forecasted timeline, please contact us at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a> so that we can investigate.</p>
+    </section>
+    <section>
+      <h2>5. Cash on Delivery (COD)</h2>
+      <p>TimeVerse.in proudly offers <strong style="color:var(--gold)">Cash on Delivery</strong> on all orders across India at absolutely no extra charge. Simply place your order and pay when your package arrives at your doorstep.</p>
+    </section>
+    <section>
+      <h2>6. Order Tracking</h2>
+      <p>Upon dispatch, customers will receive a tracking link via email through which you will be able to follow the progress of your shipment based on the latest updates made available by the shipping provider.</p>
+    </section>
+    <section>
+      <h2>7. Parcels Damaged in Transit</h2>
+      <p>If you find a parcel is damaged in transit, if possible, please reject the parcel from the courier and immediately contact us at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a>. If the parcel has been delivered without you being present, please contact us with photographs of the damaged packaging within 24 hours of delivery.</p>
+    </section>
+    <section>
+      <h2>8. Taxes</h2>
+      <p>All prices displayed on TimeVerse.in include applicable GST and taxes as required by Indian law. The price shown at checkout is the final price — there are no hidden charges.</p>
+    </section>
+    <section>
+      <h2>9. Cancellations</h2>
+      <p>If you change your mind before your order has been dispatched, please contact us immediately at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a> with your order ID. We can accept cancellations <strong>only before dispatch</strong>. Once dispatched, the order cannot be cancelled, returned, or refunded.</p>
+    </section>
+    <section>
+      <h2>10. Contact</h2>
+      <p>📧 <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a><br>🕐 Monday–Saturday · 10:00 AM – 7:00 PM IST<br>📍 Mumbai, Maharashtra, India 🇮🇳</p>
+    </section>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: PRIVACY POLICY
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-privacy">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>Privacy <em>Policy</em></h1>
+      <p>How we collect, use, and protect your information</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="policy-intro-box">
+      <p>This Privacy Policy describes how <strong style="color:var(--gold)">TimeVerse.in</strong> ("Site", "we", "us", "our") collects, uses, and discloses your personal information when you visit, use our services, or make a purchase from TimeVerse.in. By using the Services, you agree to the collection, use, and disclosure of your information as described in this Privacy Policy.</p>
+    </div>
+    <section>
+      <h2>Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will post any changes on the Site and update the "Last Updated" date accordingly.</p>
+    </section>
+    <section>
+      <h2>How We Collect Your Personal Information</h2>
+      <h3>Information You Provide Directly</h3>
+      <ul>
+        <li>Basic contact details: name, address, phone number, email</li>
+        <li>Order information: billing/shipping address, payment confirmation, email, phone</li>
+        <li>Account information: username and password</li>
+        <li>Shopping information: items viewed, added to cart, or purchased</li>
+        <li>Customer support communications</li>
+      </ul>
+      <h3>Information Collected Automatically</h3>
+      <p>We automatically collect certain information about your interaction with the Services ("Usage Data") using cookies, pixels, and similar technologies. This may include device information, browser information, IP address, and how you interact with our website.</p>
+    </section>
+    <section>
+      <h2>How We Use Your Personal Information</h2>
+      <p><strong>Providing Products and Services:</strong> Processing payments, fulfilling orders, sending account notifications, creating and managing accounts, and arranging shipping.</p>
+      <p><strong>Marketing and Advertising:</strong> Sending promotional communications by email. You can opt out at any time by contacting us.</p>
+      <p><strong>Security and Fraud Prevention:</strong> Detecting, investigating, or taking action regarding fraudulent, illegal, or malicious activity.</p>
+      <p><strong>Customer Communication:</strong> Providing customer support and improving our Services.</p>
+    </section>
+    <section>
+      <h2>How We Disclose Personal Information</h2>
+      <ul>
+        <li>With vendors who perform services on our behalf (payment processing, shipping, fulfillment)</li>
+        <li>With delivery and logistics partners to fulfill your orders</li>
+        <li>When required by law or legal process</li>
+        <li>To protect the rights and safety of TimeVerse.in or others</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Cookies</h2>
+      <p>Like many websites, we use Cookies to power and improve the site, remember your actions and preferences, and run analytics. Most browsers accept cookies by default — you can choose to remove or reject them through your browser settings.</p>
+    </section>
+    <section>
+      <h2>Your Rights and Choices</h2>
+      <ul>
+        <li><strong>Right to Access:</strong> Request access to personal information we hold about you</li>
+        <li><strong>Right to Delete:</strong> Request deletion of your personal information</li>
+        <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information</li>
+        <li><strong>Withdraw Consent:</strong> Where we rely on consent, you may withdraw it at any time</li>
+      </ul>
+      <p>To exercise any right, contact us at <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a>.</p>
+    </section>
+    <section>
+      <h2>Data Retention</h2>
+      <p>When you place an order, we maintain your order information for our records unless and until you ask us to delete it.</p>
+    </section>
+    <section>
+      <h2>Children's Data</h2>
+      <p>Our Services are not intended for children under 18 years of age. We do not knowingly collect personal information from anyone under 18.</p>
+    </section>
+    <section>
+      <h2>Security</h2>
+      <p>We implement reasonable security measures to protect your personal information. However, no security system is impenetrable and we cannot guarantee absolute security.</p>
+    </section>
+    <section>
+      <h2>Contact</h2>
+      <p>📧 <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a><br>🌐 TimeVerse.in<br>📍 Mumbai, Maharashtra, India<br>🕐 Monday–Saturday · 10:00 AM – 7:00 PM IST</p>
+    </section>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGE: TERMS OF SERVICE
+══════════════════════════════════════════════════════════════ -->
+<div class="page" id="pg-terms">
+  <div class="page-hero">
+    <div class="page-hero-ct">
+      <h1>Terms of <em>Service</em></h1>
+      <p>Please read carefully before placing an order</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="policy-intro-box">
+      <p>This website is operated by <strong style="color:var(--gold)">TimeVerse.in</strong>. By visiting our site and/or purchasing something from us, you engage in our "Service" and agree to be bound by these Terms of Service ("Terms"). Please read them carefully before accessing or using our website.</p>
+    </div>
+    <section>
+      <h2>Section 1 — Online Store Terms</h2>
+      <p>By agreeing to these Terms, you confirm you are at least 18 years of age. You may not use our products for any illegal or unauthorized purpose. A breach or violation of any Term will result in immediate termination of your Services.</p>
+    </section>
+    <section>
+      <h2>Section 2 — General Conditions</h2>
+      <p>We reserve the right to refuse service to anyone at any time. You agree not to reproduce, duplicate, copy, sell, or exploit any portion of the Service without express written permission.</p>
+    </section>
+    <section>
+      <h2>Section 3 — Accuracy of Information</h2>
+      <p>We are not responsible if information on this site is not accurate, complete, or current. We reserve the right to modify the contents of this site at any time.</p>
+    </section>
+    <section>
+      <h2>Section 4 — Modifications to Service and Prices</h2>
+      <p>Prices for our products are subject to change without notice. We reserve the right to modify or discontinue the Service at any time without notice.</p>
+    </section>
+    <section>
+      <h2>Section 5 — Products or Services</h2>
+      <p>Certain products may be available exclusively online. We reserve the right to limit the sales of our products to any person, geographic region, or jurisdiction.</p>
+      <h3>Section 5B — No Return / Refund Policy</h3>
+      <p><strong style="color:var(--red)">⚠️ All purchases from TimeVerse.in are non-returnable and non-refundable.</strong> Please review all product details carefully before completing your purchase. Once an order is confirmed and shipped, it cannot be cancelled, returned, or refunded. For product inquiries before purchase: <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a></p>
+    </section>
+    <section>
+      <h2>Section 6 — Billing and Account Information</h2>
+      <p>We reserve the right to refuse any order. You agree to provide current, complete, and accurate purchase and account information for all purchases made at our store.</p>
+    </section>
+    <section>
+      <h2>Section 7 — Third-Party Links</h2>
+      <p>Links on this site may direct you to third-party websites not affiliated with us. We are not responsible for the content or accuracy of third-party materials or websites.</p>
+    </section>
+    <section>
+      <h2>Section 8 — User Comments and Feedback</h2>
+      <p>You are solely responsible for any comments you post. By posting comments, you grant us the right to use, edit, and republish them in any form.</p>
+    </section>
+    <section>
+      <h2>Section 9 — Personal Information</h2>
+      <p>Your submission of personal information is governed by our <a onclick="nav('privacy')" style="cursor:pointer">Privacy Policy</a>.</p>
+    </section>
+    <section>
+      <h2>Section 10 — Errors, Inaccuracies and Omissions</h2>
+      <p>There may occasionally be information on our site that contains typographical errors, inaccuracies, or omissions related to product descriptions, pricing, promotions, or availability. We reserve the right to correct any errors at any time without prior notice.</p>
+    </section>
+    <section>
+      <h2>Section 11 — Prohibited Uses</h2>
+      <p>You are prohibited from using the site for any unlawful purpose, to solicit others to perform unlawful acts, to violate any regulations, to infringe upon intellectual property rights, to harass or discriminate, to submit false or misleading information, or to interfere with the security features of the Service.</p>
+    </section>
+    <section>
+      <h2>Section 12 — Disclaimer of Warranties; Limitation of Liability</h2>
+      <p>The Service and all products are provided 'as is' and 'as available' without any representation, warranties, or conditions of any kind. In no case shall TimeVerse.in be liable for any injury, loss, claim, or damages of any kind arising from your use of the Service.</p>
+    </section>
+    <section>
+      <h2>Section 13 — Indemnification</h2>
+      <p>You agree to indemnify, defend, and hold harmless TimeVerse.in and its affiliates, officers, directors, agents, and employees from any claim or demand arising out of your breach of these Terms of Service.</p>
+    </section>
+    <section>
+      <h2>Section 14 — Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the <strong style="color:var(--gold)">laws of India</strong>. Any disputes shall be subject to the exclusive jurisdiction of courts in <strong style="color:var(--gold)">Mumbai, Maharashtra, India</strong>.</p>
+    </section>
+    <section>
+      <h2>Section 15 — Changes to Terms of Service</h2>
+      <p>We reserve the right, at our sole discretion, to update, change, or replace any part of these Terms by posting updates on our website. Your continued use of the site after changes constitutes acceptance.</p>
+    </section>
+    <section>
+      <h2>Section 16 — Contact Information</h2>
+      <p>📧 <a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a><br>🌐 TimeVerse.in<br>📍 Mumbai, Maharashtra, India 🇮🇳<br>🕐 Monday–Saturday · 10:00 AM – 7:00 PM IST</p>
+    </section>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-main">👑 TimeVerse.in</span>
+      <p class="footer-tagline">From dedicated watch collectors to those discovering their first perfect timepiece — we're here to help you choose watches that match your style. ⌚</p>
+      <div class="footer-social">
+        <a class="footer-soc-btn" href="https://www.instagram.com/timeverse.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+        <a class="footer-soc-btn" href="https://www.facebook.com/TimeVerse.in"  target="_blank" rel="noopener" title="Facebook">📘</a>
+      </div>
+      <div class="footer-payments">
+        <span class="footer-pay-badge">UPI</span>
+        <span class="footer-pay-badge">Debit Card</span>
+        <span class="footer-pay-badge">Credit Card</span>
+        <span class="footer-pay-badge">Net Banking</span>
+        <span class="footer-pay-badge" style="color:var(--green)">COD ✓</span>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a onclick="nav('home')">Home</a></li>
+        <li><a onclick="nav('shop')">Collections</a></li>
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('contact')">Contact Us</a></li>
+        <li><a onclick="nav(STATE.user?'account':'login')">My Account</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Policies</h4>
+      <ul>
+        <li><a onclick="nav('shipping')">Shipping Policy</a></li>
+        <li><a onclick="nav('privacy')">Privacy Policy</a></li>
+        <li><a onclick="nav('terms')">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:timeversetimeverse@gmail.com">timeversetimeverse@gmail.com</a></li>
+        <li><a>Mon–Sat · 10AM–7PM IST</a></li>
+        <li><a>Mumbai, Maharashtra 🇮🇳</a></li>
+        <li><a href="https://instagram.com/timeverse.in" target="_blank">📸 @timeverse.in</a></li>
+        <li><a href="https://facebook.com/TimeVerse.in" target="_blank">📘 TimeVerse.in</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 TimeVerse.in — All Rights Reserved | Mumbai, Maharashtra, India</span>
+    <span class="footer-copy" style="color:rgba(201,168,76,.4)">Made with ❤️ for watch enthusiasts across India</span>
+  </div>
+</footer>
+
+<!-- ══ EMAILJS SDK ══ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- ══ FILTER BAR STYLES ══ -->
+<style>
+.filter-btn { padding:8px 18px; background:var(--dk2); border:1px solid rgba(201,168,76,.15); color:var(--tx2); cursor:pointer; font-family:var(--ff-u); font-size:10.5px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; border-radius:4px; transition:all .3s; }
+.filter-btn:hover,.filter-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,.07); }
+.filter-count { margin-left:auto; font-size:11px; color:var(--tx2); align-self:center; }
+</style>
+
+<!-- ══ MAIN SCRIPT ══ -->
+<script src="script.js"></script>
+
+</body>
+</html>
